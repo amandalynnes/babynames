@@ -46,6 +46,13 @@ def extract_names(filename):
     ['2006', 'Aaliyah 91', 'Aaron 57', 'Abagail 895', ...]
     """
     names = []
+
+    with open(filename, 'r') as f:
+        read_file = f.read()
+        year = re.search(r'Popularity\sin\s(\d\d\d\d)', read_file)
+    year = year.group(1)
+    print(year) 
+    names.append(year)
     # +++your code here+++
     return names
 
@@ -78,6 +85,10 @@ def main(args):
 
     # option flag
     create_summary = ns.summaryfile
+
+    for file in file_list:
+        file_names = extract_names(file)   
+        print('\n'.join(file_names))     #I want this to be my else
 
     # For each filename, call `extract_names()` with that single file.
     # Format the resulting list as a vertical list (separated by newline \n).
