@@ -45,23 +45,21 @@ def extract_names(filename):
     the name-rank strings in alphabetical order.
     ['2006', 'Aaliyah 91', 'Aaron 57', 'Abagail 895', ...]
     """
-    yr_and_names = []
+    yr_n_nms = []
 
     with open(filename, 'r') as f:
         read_file = f.read()
-        year = re.search(r'Popularity\sin\s(\d\d\d\d)', read_file)
+        yr = re.search(r'Popularity\sin\s(\d\d\d\d)', read_file)
         num = re.search(r'>(\d)+<', read_file)
-        f_name = re.search(r'<td>[a-zA-Z]+</td><td>([a-zA-Z]+)</td>', read_file)
-        m_name = re.search(r'<td>\d</td><td>([a-zA-Z]+)</td>', read_file)
-    year = year.group(1)
+        f_nme = re.search(r'<td>[a-zA-Z]+</td><td>([a-zA-Z]+)</td>', read_file)
+        m_nme = re.search(r'<td>\d</td><td>([a-zA-Z]+)</td>', read_file)
+    yr = yr.group(1)
     num = num.group(1)
-    f_name = f_name.group(1)
-    m_name = m_name.group(1)
-    # print(f_name + ' ' + num)
-    # print(m_name + ' ' + num)
-    yr_and_names.append(year + ', ' + f_name + ', ' + num + ', ' + m_name + ', ' + num)
+    f_nme = f_nme.group(1)
+    m_nme = m_nme.group(1)
+    yr_n_nms.append(yr + ', ' + f_nme + ', ' + num + ', ' + m_nme + ', ' + num)
     # +++your code here+++
-    return yr_and_names
+    return yr_n_nms
 
 
 def create_parser():
@@ -94,8 +92,8 @@ def main(args):
     create_summary = ns.summaryfile
 
     for file in file_list:
-        file_names = extract_names(file)   
-        print('\n'.join(file_names))     #I want this to be my else
+        file_names = extract_names(file)
+        print('\n'.join(file_names))     # I want this to be my else
 
     # For each filename, call `extract_names()` with that single file.
     # Format the resulting list as a vertical list (separated by newline \n).
