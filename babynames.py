@@ -45,16 +45,23 @@ def extract_names(filename):
     the name-rank strings in alphabetical order.
     ['2006', 'Aaliyah 91', 'Aaron 57', 'Abagail 895', ...]
     """
-    names = []
+    yr_and_names = []
 
     with open(filename, 'r') as f:
         read_file = f.read()
         year = re.search(r'Popularity\sin\s(\d\d\d\d)', read_file)
+        num = re.search(r'>(\d)+<', read_file)
+        f_name = re.search(r'<td>[a-zA-Z]+</td><td>([a-zA-Z]+)</td>', read_file)
+        m_name = re.search(r'<td>\d</td><td>([a-zA-Z]+)</td>', read_file)
     year = year.group(1)
-    print(year) 
-    names.append(year)
+    num = num.group(1)
+    f_name = f_name.group(1)
+    m_name = m_name.group(1)
+    print(f_name + ' ' + num)
+    print(m_name + ' ' + num)
+    yr_and_names.append(year)
     # +++your code here+++
-    return names
+    return yr_and_names
 
 
 def create_parser():
