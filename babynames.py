@@ -57,9 +57,9 @@ def extract_names(filename):
     num = num.group(1)
     f_name = f_name.group(1)
     m_name = m_name.group(1)
-    print(f_name + ' ' + num)
-    print(m_name + ' ' + num)
-    yr_and_names.append(year)
+    # print(f_name + ' ' + num)
+    # print(m_name + ' ' + num)
+    yr_and_names.append(year + ', ' + f_name + ', ' + num + ', ' + m_name + ', ' + num)
     # +++your code here+++
     return yr_and_names
 
