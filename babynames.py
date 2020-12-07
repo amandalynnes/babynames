@@ -31,7 +31,7 @@ Suggested milestones for incremental development:
  - Fix main() to use the extracted_names list
 """
 
-__author__ = "Amanda Simmons. Tim La, Pete Mayor"
+__author__ = "Amanda Simmons, Tim La, Pete M., tutorialspoint, geeksforgeeks"
 
 import sys
 import re
@@ -51,13 +51,13 @@ def extract_names(filename):
         read_file = f.read()
         yr = re.search(r'Popularity\sin\s(\d\d\d\d)', read_file)
         num = re.search(r'>(\d)+<', read_file)
-        f_nme = re.search(r'<td>[a-zA-Z]+</td><td>([a-zA-Z]+)</td>', read_file)
-        m_nme = re.search(r'<td>\d</td><td>([a-zA-Z]+)</td>', read_file)
+        n_1 = re.search(r'<td>([a-zA-Z]+)</td><td>([a-zA-Z]+)</td>', read_file)
+        # n_2 = re.search(r'<td>\d</td><td>([a-zA-Z]+)</td>', read_file)
     yr = yr.group(1)
     num = num.group(1)
-    f_nme = f_nme.group(1)
-    m_nme = m_nme.group(1)
-    yr_n_nms.append(yr + ', ' + f_nme + ', ' + num + ', ' + m_nme + ', ' + num)
+    n_1_fin = n_1.group(1)
+    n_2 = n_1.group(2)
+    yr_n_nms.append(yr + ', ' + n_1_fin + ', ' + num + ', ' + n_2 + ', ' + num)
     # +++your code here+++
     return yr_n_nms
 
