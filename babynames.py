@@ -31,7 +31,7 @@ Suggested milestones for incremental development:
  - Fix main() to use the extracted_names list
 """
 
-__author__ = "Amanda Simmons, Tim La, Pete M., tutorialspoint, geeksforgeeks"
+__author__ = "Amanda Simmons, Piero Madar, Tim La, Pete M."
 
 import sys
 import re
