@@ -51,30 +51,28 @@ def extract_names(filename):
         read_file = f.read()
     year = re.search(r'Popularity\sin\s(\d\d\d\d)', read_file)
     year = year.group(1)
-    # num = re.search(r'>(\d)+<', read_file)
+    year_and_names.append(year)
+
     # extracts all names and ranks into a list of 3-tuples
     names_and_ranks = re.findall(
-        r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>', 
+        r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>',
         read_file
         )
-    
+
     # populate names and ranks into a dictionary
     for rank, male_name, female_name in names_and_ranks:
         if male_name not in name_rank_dict:
             name_rank_dict[male_name] = rank
         if female_name not in name_rank_dict:
             name_rank_dict[female_name] = rank
-    pass
-    # populate year followed by alphabetized names and ranks into final list
 
-    # name_2 = re.search(r'<td>\d</td><td>([a-zA-Z]+)</td>', read_file)
-    # num = num.group(1)
-    # name_1_final = n_1.group(1)
-    # name_2 = n_1.group(2)
-    # num_name_1 = name_1_final + ' ' + num
-    # num_name_2 = name_2 + ' ' + num
-    # year_and_names.append(year + ', ' + num_name_1 + ', ' + num_name_2)
-    # return year_and_names
+    # populate year followed by alphabetized names and ranks into final list
+    for key, value in name_rank_dict.items():
+        year_and_names.append(key + ' ' + value)
+        year_and_names.sort()
+    # print(year_and_names, end='')
+
+    return year_and_names
 
 
 def create_parser():
