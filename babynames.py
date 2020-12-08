@@ -52,25 +52,24 @@ def extract_names(filename):
     year = re.search(r'Popularity\sin\s(\d\d\d\d)', read_file)
     year = year.group(1)
     year_and_names.append(year)
-
+    # num = re.search(r'>(\d)+<', read_file)
     # extracts all names and ranks into a list of 3-tuples
     names_and_ranks = re.findall(
         r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>',
         read_file
         )
-
     # populate names and ranks into a dictionary
     for rank, male_name, female_name in names_and_ranks:
         if male_name not in name_rank_dict:
             name_rank_dict[male_name] = rank
         if female_name not in name_rank_dict:
             name_rank_dict[female_name] = rank
-
+    # pass
     # populate year followed by alphabetized names and ranks into final list
     for key, value in name_rank_dict.items():
         year_and_names.append(key + ' ' + value)
         year_and_names.sort()
-    # print(year_and_names, end='')
+    print(year_and_names, end='')
 
     return year_and_names
 
@@ -94,7 +93,7 @@ def main(args):
     # Run the parser to collect command line arguments into a
     # NAMESPACE called 'ns'
     ns = parser.parse_args(args)
-
+    print(ns.files)
     if not ns:
         parser.print_usage()
         sys.exit(1)
@@ -103,10 +102,13 @@ def main(args):
 
     # option flag
     create_summary = ns.summaryfile
-
-    for file in file_list:
-        file_names = extract_names(file)
-        print('\n'.join(file_names))     # I want this to be my else
+    result_list = []
+    for f in file_list:
+        file_names = extract_names(f)
+        result_list.append(file_names)
+    if create_summary:
+        # with open(create_summary)
+        pass
 
     # For each filename, call `extract_names()` with that single file.
     # Format the resulting list as a vertical list (separated by newline \n).
