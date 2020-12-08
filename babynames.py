@@ -31,7 +31,7 @@ Suggested milestones for incremental development:
  - Fix main() to use the extracted_names list
 """
 
-__author__ = "Amanda Simmons, Piero Madar, Tim La, Pete M."
+__author__ = "Amanda Simmons, Piero Madar, Cesar R., Tim La, Pete M."
 
 import sys
 import re
@@ -69,7 +69,7 @@ def extract_names(filename):
     for key, value in name_rank_dict.items():
         year_and_names.append(key + ' ' + value)
         year_and_names.sort()
-    print(year_and_names, end='')
+    # print(year_and_names, end='')
 
     return year_and_names
 
@@ -93,7 +93,7 @@ def main(args):
     # Run the parser to collect command line arguments into a
     # NAMESPACE called 'ns'
     ns = parser.parse_args(args)
-    print(ns.files)
+    # print(ns.files)
     if not ns:
         parser.print_usage()
         sys.exit(1)
@@ -102,13 +102,17 @@ def main(args):
 
     # option flag
     create_summary = ns.summaryfile
-    result_list = []
+    # print(create_summary)
+    # result_list = []
     for f in file_list:
         file_names = extract_names(f)
-        result_list.append(file_names)
-    if create_summary:
-        # with open(create_summary)
-        pass
+        # result_list.append(file_names)
+        if create_summary:
+            with open(f'{f}.summary', 'w') as f:
+                f.write('\n'.join(file_names))
+        else:
+            for f in file_names:
+                print(f)
 
     # For each filename, call `extract_names()` with that single file.
     # Format the resulting list as a vertical list (separated by newline \n).
